@@ -1,14 +1,14 @@
-### Delivery DSA: A Visual Shortest Path Finder
+# Delivery DSA: A Visual Shortest Path Finder
 
 A clean, interactive web application that visualizes Dijkstra's shortest path algorithm on a city map. This project translates the core logic from a foundational C implementation of Dijkstra's into a full-stack Next.js application with a React-based visual frontend.
 
-### 📍 Project Overview
+## 📍 Project Overview
 
 This project is a web-based, interactive tool that solves a classic logistics problem: finding the shortest route between two points.
 
 Users can click on any two locations on the map to set a "Start" and "End" point. The application then calculates the most efficient route, instantly highlighting the shortest path on the map and displaying the total distance. It serves as a practical, hands-on example of how fundamental Data Structures and Algorithms (DSA) power real-world applications like Google Maps, Uber, and delivery services.
 
-### ✨ Features
+## ✨ Features
 
 Interactive Visual Map: A fully responsive map with clickable locations (nodes) and roads (weighted edges).
 
@@ -22,11 +22,11 @@ Route Details: Displays the total distance (weight) of the path and the step-by-
 
 Clear State Management: Includes loading, error, and result states for a smooth user experience.
 
-### 🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 This project combines a C-inspired backend logic with a modern web frontend.
 
-## Frontend:
+### Frontend:
 
 Next.js (React): For server-side rendering and client-side interactivity.
 
@@ -36,11 +36,11 @@ Tailwind CSS: For all styling, enabling a responsive, utility-first design.
 
 lucide-react: For clean and simple icons.
 
-## Backend:
+### Backend:
 
 Next.js API Routes: Serverless functions to handle pathfinding requests.
 
-## Core Logic:
+### Core Logic:
 
 Graph (Adjacency List): The city map is represented as a Map structure (src/lib/pathfinder.ts), acting as an adjacency list.
 
@@ -48,11 +48,11 @@ Dijkstra's Algorithm: The shortest path logic is a TypeScript implementation of 
 
 Priority Queue (Min-Heap): Used within Dijkstra's to achieve an efficient O(E log V) time complexity, a key upgrade from the C code's O(V^2) array-based search.
 
-### ⚙️ How It Works: From C to the Web
+## ⚙️ How It Works: From C to the Web
 
 The core of this project is the translation of the logic from the original simplest_path.c file into a modern web architecture.
 
-## 1. The C Code Foundation (The "Brain")
+### 1. The C Code Foundation (The "Brain")
 
 The original C program (simplest_path.c) defined the entire logic:
 
@@ -62,7 +62,7 @@ It ran Dijkstra's Algorithm to find the shortest path, using arrays to track dis
 
 It used a Stack to reverse the parent array and print the path in the correct order.
 
-## 2. The Next.js Architecture
+### 2. The Next.js Architecture
 
 This application splits that logic into a client-server model:
 
@@ -96,11 +96,11 @@ If an edge is in the path, it gets green Tailwind classes (bg-green-500, h-2.5).
 
 This is how the backend logic is visually represented on the frontend.
 
-### 🚀 Getting Started
+## 🚀 Getting Started
 
 To run this project locally:
 
-## Clone the repository:
+### Clone the repository:
 
 ```
 git clone [https://github.com/your-username/delivery_dsa.git](https://github.com/your-username/delivery_dsa.git)
@@ -108,19 +108,19 @@ cd delivery_dsa
 ```
 
 
-## Install dependencies:
+### Install dependencies:
 
 ```
 npm install
 ```
 
 
-## Run the development server:
+### Run the development server:
 
 ```
 npm run dev
 ```
 
 
-## Open your browser:
+### Open your browser:
 Navigate to http://localhost:3000 to see the application in action.
