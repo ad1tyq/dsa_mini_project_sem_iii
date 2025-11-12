@@ -1,22 +1,9 @@
-// This is a Client Component, so we need "use client"
 "use client";
 
 import { useState } from 'react';
 import Head from 'next/head';
 import { MapPin, Check, X, Navigation, Loader2, Play } from 'lucide-react';
 
-/*
- * =====================================================================================
- *
- * DATA CONFIGURATION
- *
- * We store the visual map data here. All styling is 100% Tailwind.
- *
- * =====================================================================================
- */
-
-// These are the coordinates for our visual map, defined as Tailwind classes.
-// Using Tailwind's JIT (Just-In-Time) compiler lets us use arbitrary values.
 const nodePositions: { [key: string]: string } = {
     'Restaurant': 'top-[50px] left-[50px]',
     'Crossroads': 'top-[150px] left-[250px]',
@@ -24,8 +11,6 @@ const nodePositions: { [key: string]: string } = {
     'Customer House': 'top-[250px] left-[450px]',
 };
 
-// These are the visual edges (roads). We include the Tailwind classes
-// for position and rotation directly in the object.
 const edgeData: { id: string, source: string, target: string, style: string }[] = [
     // Restaurant -> Crossroads
     { id: 'R-C', source: 'Restaurant', target: 'Crossroads', style: 'top-[75px] left-[170px] w-[224px] rotate-[26.5deg]' },
@@ -39,23 +24,14 @@ const edgeData: { id: string, source: string, target: string, style: string }[] 
     { id: 'GS-CH', source: 'Gas Station', target: 'Customer House', style: 'top-[175px] left-[570px] w-[200px] rotate-90' },
 ];
 
-/*
- * =====================================================================================
- *
- * REACT COMPONENT
- *
- * =====================================================================================
- */
 export default function Home() {
-    // --- React State ---
+
     const [startNode, setStartNode] = useState<string | null>(null);
     const [endNode, setEndNode] = useState<string | null>(null);
     const [resultPath, setResultPath] = useState<string[]>([]);
     const [resultDistance, setResultDistance] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-
-    // --- Event Handlers ---
 
     const handleNodeClick = (nodeName: string) => {
         if (isLoading) return;
@@ -98,10 +74,7 @@ export default function Home() {
             }
 
             const { path, distance } = await response.json();
-            
-            // *** THIS IS THE KEY ***
-            // We update the state with the backend's answer.
-            // React will now re-render the UI with new classes.
+
             setResultPath(path);
             setResultDistance(distance);
 
@@ -120,10 +93,6 @@ export default function Home() {
         setIsLoading(false);
     };
 
-    // --- Dynamic Styling Helpers (with Tailwind) ---
-
-    // This is the core of the VISUALIZATION.
-    // It returns different Tailwind classes based on the current state.
     const getNodeClassName = (nodeName: string) => {
         const baseClasses = 'absolute flex items-center gap-2 p-3 pr-4 rounded-full shadow-lg cursor-pointer font-medium transition-all duration-200 ease-in-out transform hover:scale-105';
 
@@ -151,8 +120,8 @@ export default function Home() {
 
         // Check if a segment of the path matches this edge
         for (let i = 0; i < resultPath.length - 1; i++) {
-            if ((resultPath[i] === edge.source && resultPath[i+1] === edge.target) ||
-                (resultPath[i] === edge.target && resultPath[i+1] === edge.source)) {
+            if ((resultPath[i] === edge.source && resultPath[i + 1] === edge.target) ||
+                (resultPath[i] === edge.target && resultPath[i + 1] === edge.source)) {
                 // Return highlighted path style
                 return `${baseClasses} bg-green-500 h-2.5`;
             }
@@ -168,13 +137,13 @@ export default function Home() {
             </Head>
 
             <main className="flex flex-col items-center w-full max-w-6xl">
-                
+
                 <header className="text-center">
                     <h1 className="text-3xl sm:text-5xl font-bold text-gray-800">
                         Delivery DSA: Visual Route-Finder
                     </h1>
                     <p className="text-base sm:text-xl text-gray-600 mt-4">
-                        Click two locations to find the shortest delivery path.
+                        <b>By: Aditya Bhardwaj<br />Reg. No.: 2427010169<br />Section: G</b>
                     </p>
                 </header>
 
@@ -208,7 +177,7 @@ export default function Home() {
                     <div className="lg:w-1/3 flex flex-col gap-5">
                         <div className="bg-white p-5 rounded-lg shadow-lg">
                             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Controls</h2>
-                            
+
                             <div className="space-y-4">
                                 <div className="p-4 rounded-lg bg-gray-50 border">
                                     <label className="text-sm font-medium text-gray-500">STARTING POINT</label>
@@ -254,7 +223,7 @@ export default function Home() {
                                 <p>{error}</p>
                             </div>
                         )}
-                        
+
                         {resultDistance !== null && (
                             <div className="bg-green-50 border-l-4 border-green-500 text-green-800 p-4 rounded-lg shadow-md" role="alert">
                                 <div className="flex items-center gap-3">
@@ -268,6 +237,9 @@ export default function Home() {
                         )}
                     </div>
                 </div>
+                <p className="text-base sm:text-xl text-gray-600 mt-4">
+                    Click two locations to find the shortest delivery path.
+                </p>
             </main>
         </div>
     );
