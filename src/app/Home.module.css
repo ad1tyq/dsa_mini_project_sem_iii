@@ -1,0 +1,324 @@
+.container {
+
+    min-height: 100vh;
+
+    padding: 0 0.5rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+}
+
+.main {
+
+    padding: 2rem 0;
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    width: 100%;
+
+    max-width: 800px;
+
+}
+
+.title {
+
+    margin: 0;
+
+    line-height: 1.15;
+
+    font-size: 3.5rem;
+
+    color: #004d40; /* Dark green */
+
+}
+
+.description {
+
+    line-height: 1.5;
+
+    font-size: 1.2rem;
+
+    color: #555;
+
+    margin-bottom: 2rem;
+
+}
+
+.mapContainer {
+
+    width: 100%;
+
+    max-width: 600px;
+
+    height: 350px;
+
+    border: 2px solid #ddd;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    margin-bottom: 2rem;
+
+}
+
+.map {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 100%;
+
+}
+
+/* --- This is the VISUAL part --- */
+
+/* Base style for all locations */
+
+.node {
+
+    position: absolute;
+
+    width: 120px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background-color: #fff;
+
+    border: 2px solid #00796b; /* Teal */
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    color: #004d40;
+
+    transition: all 0.2s ease;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.node:hover {
+
+    transform: scale(1.05);
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+}
+
+/* Style for selected start node */
+
+.selectedStart {
+
+    background-color: #b2dfdb; /* Light teal */
+
+    border-color: #004d40;
+
+    box-shadow: 0 0 10px 3px #00796b;
+
+}
+
+/* Style for selected end node */
+
+.selectedEnd {
+
+    background-color: #ffccbc; /* Light red/orange */
+
+    border-color: #d84315;
+
+    box-shadow: 0 0 10px 3px #d84315;
+
+}
+
+/* Style for nodes in the final path */
+
+.pathNode {
+
+    background-color: #c8e6c9; /* Light green */
+
+    border-color: #388e3c;
+
+    color: #1b5e20;
+
+}
+
+/* Base style for roads */
+
+.edge {
+
+    position: absolute;
+
+    background-color: #b0bec5; /* Grey */
+
+    height: 5px;
+
+    z-index: -1;
+
+    transform-origin: 0 0;
+
+    transition: background-color 0.3s ease;
+
+}
+
+/* Style for edges in the final path */
+
+.pathEdge {
+
+    background-color: #388e3c; /* Green */
+
+    height: 7px;
+
+}
+
+/* --- Hardcoded Edge Positions & Rotations --- */
+
+/* These values connect the absolute-positioned nodes */
+
+/* Restaurant (50, 50) -> Crossroads (150, 250) */
+
+.edge0 { top: 75px; left: 170px; width: 224px; transform: rotate(26.5deg); }
+
+/* Restaurant (50, 50) -> Gas Station (50, 450) */
+
+.edge1 { top: 75px; left: 170px; width: 280px; transform: rotate(0deg); }
+
+/* Crossroads (150, 250) -> Gas Station (50, 450) */
+
+.edge2 { top: 175px; left: 370px; width: 224px; transform: rotate(-26.5deg); }
+
+/* Crossroads (150, 250) -> Customer House (250, 450) */
+
+.edge3 { top: 275px; left: 370px; width: 224px; transform: rotate(26.5deg); }
+
+/* Gas Station (50, 450) -> Customer House (250, 450) */
+
+.edge4 { top: 175px; left: 570px; width: 200px; transform: rotate(90deg); }
+
+/* --- Controls and Results --- */
+
+.controls {
+
+    display: flex;
+
+    gap: 1rem;
+
+    align-items: center;
+
+    margin-bottom: 1.5rem;
+
+}
+
+.selectionInfo {
+
+    border: 1px solid #ddd;
+
+    padding: 0 1rem;
+
+    border-radius: 8px;
+
+    background: #fafafa;
+
+}
+
+.selectionInfo p {
+
+    margin: 0.5rem 0;
+
+}
+
+.controls button {
+
+    padding: 0.8rem 1.5rem;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    color: white;
+
+    background-color: #00796b;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+
+}
+
+.controls button:hover:not(:disabled) {
+
+    background-color: #004d40;
+
+}
+
+.controls button:disabled {
+
+    background-color: #9e9e9e;
+
+    cursor: not-allowed;
+
+}
+
+.resetButton {
+
+    background-color: #d32f2f !important;
+
+}
+
+.resetButton:hover {
+
+    background-color: #b71c1c !important;
+
+}
+
+.errorText {
+
+    color: #d32f2f;
+
+    font-weight: bold;
+
+}
+
+.result {
+
+    width: 100%;
+
+    text-align: center;
+
+    background: #e8f5e9;
+
+    border: 2px solid #388e3c;
+
+    border-radius: 8px;
+
+    padding: 1rem;
+
+}
+

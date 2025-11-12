@@ -19,8 +19,17 @@
   }
 }
 
+/* Keep the default Next.js styles (like Inter font, etc.) */
+
+/* Add these at the bottom */
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f7f6;
+  color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
 }
